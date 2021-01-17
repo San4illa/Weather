@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.san4illa.weather.MainFragment"
+        android:name="com.san4illa.weather.ui.WeatherFragment"
         android:label="WeatherFragment" />
 </navigation>
