@@ -1,0 +1,11 @@
+def getStringFromFile(fileName, property) {
+    Properties props = new Properties()
+    props.load(project.rootProject.file(fileName).newDataInputStream())
+    return props[property].toString()
+}
+
+def getStringFromKeysFile(property) {
+    return getStringFromFile('keys.properties', property).toString()
+}
+
+ext.keys = ["apiKey": getStringFromKeysFile('apiKey'),]
