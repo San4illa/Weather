@@ -19,6 +19,7 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_marginTop="16dp"
+            app:imageUrl="@{viewModel.currentlyWeather.iconUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +28,7 @@
             android:id="@+id/weatherSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.currentlyWeather.summary}"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:text="@{viewModel.currentlyWeather.temperature}"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

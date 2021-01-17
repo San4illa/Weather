@@ -1,5 +1,8 @@
 package com.san4illa.weather.network
 
+import com.san4illa.weather.domain.Weather
+import kotlin.math.round
+
 data class WeatherResponse(
     val latitude: Double,
     val longitude: Double,
@@ -23,3 +26,11 @@ data class WeatherWrapper(
     val icon: String,
     val data: List<WeatherItem>
 )
+
+fun WeatherResponse.toWeather(): Weather {
+    return Weather(
+        temperature = "${round(currently.temperature).toInt()}°",
+        summary = currently.summary,
+        iconUrl = "https://darksky.net/images/weather-icons/${currently.icon}.png"
+    )
+}
