@@ -14,7 +14,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface WeatherService {
-    @GET("{latitude},{longitude}?units=si")
+    @GET("{latitude},{longitude}?units=si&lang=ru")
     suspend fun getWeather(
         @Path("latitude") latitude: Double = 37.8267,
         @Path("longitude") longitude: Double = -122.4233

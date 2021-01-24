@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.san4illa.weather.domain.DailyWeather
 import com.san4illa.weather.domain.Weather
 import com.san4illa.weather.network.State
 import java.text.SimpleDateFormat
@@ -18,15 +19,27 @@ fun ImageView.bindImage(url: String?) {
         .into(this)
 }
 
-@BindingAdapter("listData")
-fun RecyclerView.bindList(data: List<Weather>?) {
+@BindingAdapter("hourlyList")
+fun RecyclerView.bindHourlyList(data: List<Weather>?) {
     (adapter as HourlyWeatherAdapter).submitList(data)
 }
 
 @BindingAdapter("time")
-fun TextView.bindText(time: Long) {
+fun TextView.bindTime(time: Long) {
     val date = Date(time * 1000)
     val formatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+    text = formatter.format(date)
+}
+
+@BindingAdapter("dailyList")
+fun RecyclerView.bindDailyList(data: List<DailyWeather>?) {
+    (adapter as DailyWeatherAdapter).submitList(data)
+}
+
+@BindingAdapter("date")
+fun TextView.bindDate(time: Long) {
+    val date = Date(time * 1000)
+    val formatter = SimpleDateFormat("MMM d", Locale.getDefault())
     text = formatter.format(date)
 }
 

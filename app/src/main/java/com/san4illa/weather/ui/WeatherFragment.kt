@@ -34,6 +34,11 @@ class WeatherFragment : Fragment() {
             adapter = HourlyWeatherAdapter()
         }
 
+        binding.dailyWeather.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = DailyWeatherAdapter()
+        }
+
         return binding.root
     }
 

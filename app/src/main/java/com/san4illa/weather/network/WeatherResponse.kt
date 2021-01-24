@@ -1,5 +1,6 @@
 package com.san4illa.weather.network
 
+import com.san4illa.weather.domain.DailyWeather
 import com.san4illa.weather.domain.Weather
 import kotlin.math.round
 
@@ -13,7 +14,9 @@ data class WeatherResponse(
 
 data class WeatherItem(
     val time: Long,
-    val temperature: Double,
+    val temperature: Double?,
+    val temperatureHigh: Double?,
+    val temperatureLow: Double?,
     val windSpeed: Double,
     val humidity: Double,
     val pressure: Double,
@@ -33,7 +36,7 @@ fun WeatherResponse.toCurrentWeather(): Weather {
 
 private fun WeatherItem.toWeather() = Weather(
     time = time,
-    temperature = "${round(temperature).toInt()}°",
+    temperature = "${round(temperature!!).toInt()}°",
     summary = summary,
     iconUrl = "https://darksky.net/images/weather-icons/${icon}.png"
 )
@@ -41,3 +44,15 @@ private fun WeatherItem.toWeather() = Weather(
 fun WeatherResponse.toHourlyWeather(): List<Weather> {
     return hourly.data.map { it.toWeather() }
 }
+
+fun WeatherResponse.toDailyWeather(): List<DailyWeather> {
+    return daily.data.map { it.toDailyWeather() }
+}
+
+private fun WeatherItem.toDailyWeather() = DailyWeather(
+    time = time,
+    minTemperature = "${round(temperatureLow!!).toInt()}°",
+    maxTemperature = "${round(temperatureHigh!!).toInt()}°",
+    summary = summary,
+    iconUrl = "https://darksky.net/images/weather-icons/${icon}.png"
+)
