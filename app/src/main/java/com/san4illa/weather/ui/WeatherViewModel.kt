@@ -1,5 +1,6 @@
 package com.san4illa.weather.ui
 
+import android.location.Location
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,14 +12,14 @@ class WeatherViewModel : ViewModel() {
 
     val currentlyWeather = repository.currentlyWeather
 
-    init {
-        refreshWeather()
+    fun onLocationUpdated(location: Location) {
+        refreshWeather(location)
     }
 
-    private fun refreshWeather() {
+    private fun refreshWeather(location: Location) {
         viewModelScope.launch {
             try {
-                repository.refreshWeather()
+                repository.refreshWeather(location.latitude, location.longitude)
             } catch (error: Exception) {
                 Log.i("WeatherViewModel", "error ${error.message}")
             }

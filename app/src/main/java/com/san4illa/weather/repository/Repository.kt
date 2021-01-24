@@ -13,9 +13,9 @@ class Repository {
     val currentlyWeather: LiveData<Weather>
         get() = _currentlyWeather
 
-    suspend fun refreshWeather() {
+    suspend fun refreshWeather(latitude: Double, longitude: Double) {
         withContext(Dispatchers.IO) {
-            val weatherResponse = WeatherApi.service.getWeather()
+            val weatherResponse = WeatherApi.service.getWeather(latitude, longitude)
 
             withContext(Dispatchers.Main) {
                 _currentlyWeather.value = weatherResponse.toWeather()
