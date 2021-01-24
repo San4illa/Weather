@@ -26,3 +26,7 @@ object WeatherApi {
         retrofit.create(WeatherService::class.java)
     }
 }
+
+enum class State {
+    LOADING, DONE, ERROR
+}

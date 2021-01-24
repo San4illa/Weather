@@ -27,10 +27,17 @@ data class WeatherWrapper(
     val data: List<WeatherItem>
 )
 
-fun WeatherResponse.toWeather(): Weather {
-    return Weather(
-        temperature = "${round(currently.temperature).toInt()}°",
-        summary = currently.summary,
-        iconUrl = "https://darksky.net/images/weather-icons/${currently.icon}.png"
-    )
+fun WeatherResponse.toCurrentWeather(): Weather {
+    return currently.toWeather()
+}
+
+private fun WeatherItem.toWeather() = Weather(
+    time = time,
+    temperature = "${round(temperature).toInt()}°",
+    summary = summary,
+    iconUrl = "https://darksky.net/images/weather-icons/${icon}.png"
+)
+
+fun WeatherResponse.toHourlyWeather(): List<Weather> {
+    return hourly.data.map { it.toWeather() }
 }
