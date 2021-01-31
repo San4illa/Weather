@@ -17,19 +17,20 @@
         <TextView
             android:id="@+id/date"
             date="@{weather.time}"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/normalMargin"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Jul 4" />
+            tools:text="4 декабря" />
 
         <TextView
             android:id="@+id/maxTemperature"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@{weather.maxTemperature}"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,9 +42,10 @@
 
         <TextView
             android:id="@+id/minTemperature"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/normalMargin"
+            android:gravity="center"
             android:text="@{weather.minTemperature}"
             android:textColor="@android:color/darker_gray"
             android:textSize="20sp"

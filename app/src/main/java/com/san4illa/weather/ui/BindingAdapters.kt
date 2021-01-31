@@ -39,7 +39,7 @@ fun RecyclerView.bindDailyList(data: List<DailyWeather>?) {
 @BindingAdapter("date")
 fun TextView.bindDate(time: Long) {
     val date = Date(time * 1000)
-    val formatter = SimpleDateFormat("MMM d", Locale.getDefault())
+    val formatter = SimpleDateFormat("d MMMM", Locale.getDefault())
     text = formatter.format(date)
 }
 
