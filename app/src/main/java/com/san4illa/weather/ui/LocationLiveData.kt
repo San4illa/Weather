@@ -24,7 +24,6 @@ class LocationLiveData(context: Context) : LiveData<Location>() {
     private val request = LocationRequest.create().apply {
         numUpdates = 1
         priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-
     }
 
     @SuppressLint("MissingPermission")
