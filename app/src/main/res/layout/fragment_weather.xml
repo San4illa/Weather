@@ -45,15 +45,15 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/weatherSummary"
+                        android:id="@+id/city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.currentlyWeather.summary}"
-                        android:textSize="16sp"
+                        android:text="@{viewModel.city}"
+                        android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/weatherIcon"
-                        tools:text="Облачно" />
+                        app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+                        tools:text="Санкт Петербург" />
 
                     <TextView
                         android:id="@+id/weatherTemperature"
@@ -61,11 +61,24 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/normalMargin"
                         android:text="@{viewModel.currentlyWeather.temperature}"
-                        android:textSize="36sp"
+                        android:textSize="42sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/weatherSummary"
+                        app:layout_constraintTop_toBottomOf="@+id/city"
                         tools:text="23°" />
+
+                    <TextView
+                        android:id="@+id/weatherSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/normalMargin"
+                        android:text="@{viewModel.currentlyWeather.summary}"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/weatherTemperature"
+                        tools:text="Облачно" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
