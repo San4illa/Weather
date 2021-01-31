@@ -1,5 +1,6 @@
 package com.san4illa.weather.ui
 
+import android.content.Context
 import android.location.Location
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,9 +11,10 @@ import com.san4illa.weather.network.State
 import com.san4illa.weather.repository.Repository
 import kotlinx.coroutines.launch
 
-class WeatherViewModel : ViewModel() {
-    private val repository = Repository()
+class WeatherViewModel(context: Context) : ViewModel() {
+    val location = LocationLiveData(context)
 
+    private val repository = Repository()
     val currentlyWeather = repository.currentlyWeather
     val hourlyWeather = repository.hourlyWeather
     val dailyWeather = repository.dailyWeather
