@@ -39,7 +39,7 @@
                         android:layout_width="160dp"
                         android:layout_height="160dp"
                         android:layout_marginTop="@dimen/normalMargin"
-                        app:imageUrl="@{viewModel.currentlyWeather.iconUrl}"
+                        app:imageUrl="@{viewModel.weatherForecast.currentlyWeather.iconUrl}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/normalMargin"
-                        android:text="@{viewModel.currentlyWeather.temperature}"
+                        android:text="@{viewModel.weatherForecast.currentlyWeather.temperature}"
                         android:textSize="42sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/normalMargin"
-                        android:text="@{viewModel.currentlyWeather.summary}"
+                        android:text="@{viewModel.weatherForecast.currentlyWeather.summary}"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +83,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/hourlyWeather"
-                    hourlyList="@{viewModel.hourlyWeather}"
+                    hourlyList="@{viewModel.weatherForecast.hourlyWeather}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normalMargin"
@@ -96,7 +96,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/dailyWeather"
-                    dailyList="@{viewModel.dailyWeather}"
+                    dailyList="@{viewModel.weatherForecast.dailyWeather}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/normalMargin"

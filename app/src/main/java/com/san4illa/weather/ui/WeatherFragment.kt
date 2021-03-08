@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.san4illa.weather.databinding.FragmentWeatherBinding
+import com.san4illa.weather.repository.Repository
 
 class WeatherFragment : Fragment() {
     companion object {
@@ -20,7 +21,7 @@ class WeatherFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider(
             this,
-            WeatherViewModelFactory(requireActivity().application)
+            WeatherViewModelFactory(requireActivity().application, Repository())
         ).get(WeatherViewModel::class.java)
     }
 

@@ -1,7 +1,8 @@
-package com.san4illa.weather.network
+package com.san4illa.weather.network.model
 
 import com.san4illa.weather.domain.DailyWeather
 import com.san4illa.weather.domain.Weather
+import com.san4illa.weather.domain.WeatherForecast
 import kotlin.math.round
 
 data class WeatherResponse(
@@ -12,25 +13,15 @@ data class WeatherResponse(
     val daily: WeatherWrapper
 )
 
-data class WeatherItem(
-    val time: Long,
-    val temperature: Double?,
-    val temperatureHigh: Double?,
-    val temperatureLow: Double?,
-    val windSpeed: Double,
-    val humidity: Double,
-    val pressure: Double,
-    val summary: String,
-    val icon: String
-)
+fun WeatherResponse.toForecast(): WeatherForecast {
+    return WeatherForecast(
+        toCurrentWeather(),
+        toHourlyWeather(),
+        toDailyWeather()
+    )
+}
 
-data class WeatherWrapper(
-    val summary: String,
-    val icon: String,
-    val data: List<WeatherItem>
-)
-
-fun WeatherResponse.toCurrentWeather(): Weather {
+private fun WeatherResponse.toCurrentWeather(): Weather {
     return currently.toWeather()
 }
 
@@ -41,11 +32,11 @@ private fun WeatherItem.toWeather() = Weather(
     iconUrl = "https://darksky.net/images/weather-icons/${icon}.png"
 )
 
-fun WeatherResponse.toHourlyWeather(): List<Weather> {
+private fun WeatherResponse.toHourlyWeather(): List<Weather> {
     return hourly.data.map { it.toWeather() }
 }
 
-fun WeatherResponse.toDailyWeather(): List<DailyWeather> {
+private fun WeatherResponse.toDailyWeather(): List<DailyWeather> {
     return daily.data.map { it.toDailyWeather() }
 }
 

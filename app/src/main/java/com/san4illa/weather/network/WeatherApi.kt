@@ -1,6 +1,7 @@
 package com.san4illa.weather.network
 
 import com.san4illa.weather.BuildConfig
+import com.san4illa.weather.network.model.WeatherResponse
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
