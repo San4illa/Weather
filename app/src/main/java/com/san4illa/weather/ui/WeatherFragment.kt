@@ -8,22 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.san4illa.weather.databinding.FragmentWeatherBinding
 import com.san4illa.weather.repository.Repository
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.recyclerview.widget.DividerItemDecoration
 
+
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
     companion object {
         private const val REQUEST_PERMISSION_CODE = 101
     }
 
-    private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            WeatherViewModelFactory(requireActivity().application, Repository())
-        ).get(WeatherViewModel::class.java)
-    }
+    private val viewModel: WeatherViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val binding = FragmentWeatherBinding.inflate(inflater)
