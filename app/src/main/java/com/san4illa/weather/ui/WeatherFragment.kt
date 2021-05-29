@@ -7,18 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.san4illa.weather.databinding.FragmentWeatherBinding
-import com.san4illa.weather.repository.Repository
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
-    private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            WeatherViewModelFactory(requireActivity().application, Repository())
-        ).get(WeatherViewModel::class.java)
-    }
+    private val viewModel: WeatherViewModel by viewModels()
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {

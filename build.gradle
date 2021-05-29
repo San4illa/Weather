@@ -1,5 +1,7 @@
 buildscript {
     ext.kotlinVersion = "1.4.21"
+    ext.hiltVersion = '2.33-beta'
+
     repositories {
         google()
         jcenter()
@@ -7,6 +9,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
     }
     apply from: project.rootProject.file("keys.gradle")
 }

@@ -10,11 +10,15 @@ import androidx.lifecycle.viewModelScope
 import com.san4illa.weather.domain.WeatherForecast
 import com.san4illa.weather.network.State
 import com.san4illa.weather.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class WeatherViewModel(
-    private val context: Context,
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val repository: Repository
 ) : ViewModel() {
     val location = LocationLiveData(context)
