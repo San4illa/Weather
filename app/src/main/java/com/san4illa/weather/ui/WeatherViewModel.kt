@@ -28,17 +28,13 @@ class WeatherViewModel @Inject constructor(
     val weatherForecast: LiveData<WeatherForecast>
         get() = _weatherForecast
 
-    private val _state = MutableLiveData<State>()
+    private val _state = MutableLiveData(State.LOADING)
     val state: LiveData<State>
         get() = _state
 
     private val _closeActivity = MutableLiveData(false)
     val closeActivity: LiveData<Boolean>
         get() = _closeActivity
-
-    init {
-        _state.value = State.LOADING
-    }
 
     fun onPermissionsGranted() {
         viewModelScope.launch {
