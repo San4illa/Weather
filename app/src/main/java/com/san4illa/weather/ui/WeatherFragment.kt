@@ -23,6 +23,8 @@ class WeatherFragment : Fragment() {
 
             if (arePermissionsGranted) {
                 viewModel.onPermissionsGranted()
+            } else {
+                requireActivity().finish()
             }
         }
 
