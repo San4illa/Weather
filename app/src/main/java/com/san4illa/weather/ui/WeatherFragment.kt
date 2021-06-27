@@ -22,7 +22,7 @@ class WeatherFragment : Fragment() {
                     && it[Manifest.permission.ACCESS_COARSE_LOCATION] != false
 
             if (arePermissionsGranted) {
-                requestLocation()
+                viewModel.onPermissionsGranted()
             }
         }
 
@@ -51,11 +51,5 @@ class WeatherFragment : Fragment() {
         locationPermissionLauncher.launch(
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         )
-    }
-
-    private fun requestLocation() {
-        viewModel.location.observe(viewLifecycleOwner, { location ->
-            viewModel.onLocationUpdated(location)
-        })
     }
 }
