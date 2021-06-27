@@ -24,7 +24,7 @@ class WeatherFragment : Fragment() {
             if (arePermissionsGranted) {
                 viewModel.onPermissionsGranted()
             } else {
-                requireActivity().finish()
+                viewModel.onPermissionsDenied()
             }
         }
 
@@ -53,5 +53,11 @@ class WeatherFragment : Fragment() {
         locationPermissionLauncher.launch(
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         )
+
+        viewModel.closeActivity.observe(viewLifecycleOwner, { if (it) closeActivity() })
+    }
+
+    private fun closeActivity() {
+        requireActivity().finish()
     }
 }

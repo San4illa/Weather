@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.san4illa.weather.domain.WeatherForecast
 import com.san4illa.weather.domain.State
+import com.san4illa.weather.domain.WeatherForecast
 import com.san4illa.weather.repository.CityNameRepository
 import com.san4illa.weather.repository.LocationRepository
 import com.san4illa.weather.repository.WeatherRepository
@@ -31,6 +31,10 @@ class WeatherViewModel @Inject constructor(
     private val _state = MutableLiveData<State>()
     val state: LiveData<State>
         get() = _state
+
+    private val _closeActivity = MutableLiveData(false)
+    val closeActivity: LiveData<Boolean>
+        get() = _closeActivity
 
     init {
         _state.value = State.LOADING
@@ -61,5 +65,9 @@ class WeatherViewModel @Inject constructor(
 
     private fun getCityName(location: Location) {
         _city.value = cityNameRepository.getCityName(location)
+    }
+
+    fun onPermissionsDenied() {
+        _closeActivity.value = true
     }
 }
