@@ -9,14 +9,14 @@ import com.san4illa.weather.domain.WeatherForecast
 import com.san4illa.weather.domain.State
 import com.san4illa.weather.repository.CityNameRepository
 import com.san4illa.weather.repository.LocationRepository
-import com.san4illa.weather.repository.Repository
+import com.san4illa.weather.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private val repository: Repository,
+    private val weatherRepository: WeatherRepository,
     private val locationRepository: LocationRepository,
     private val cityNameRepository: CityNameRepository
 ) : ViewModel() {
@@ -48,7 +48,7 @@ class WeatherViewModel @Inject constructor(
     private fun getForecast(location: Location) {
         viewModelScope.launch {
             try {
-                val weatherForecast = repository.getForecast(location.latitude, location.longitude)
+                val weatherForecast = weatherRepository.getForecast(location.latitude, location.longitude)
                 _weatherForecast.value = weatherForecast
 
                 getCityName(location)

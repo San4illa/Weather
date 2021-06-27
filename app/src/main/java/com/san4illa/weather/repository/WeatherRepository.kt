@@ -5,7 +5,7 @@ import com.san4illa.weather.network.WeatherService
 import com.san4illa.weather.network.model.toForecast
 import javax.inject.Inject
 
-class Repository @Inject constructor(
+class WeatherRepository @Inject constructor(
     private val weatherApi: WeatherService
 ) {
     suspend fun getForecast(latitude: Double, longitude: Double): WeatherForecast {
