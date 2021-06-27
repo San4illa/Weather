@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.san4illa.weather.domain.DailyWeather
 import com.san4illa.weather.domain.Weather
-import com.san4illa.weather.network.State
+import com.san4illa.weather.domain.State
 import java.text.SimpleDateFormat
 import java.util.*
 

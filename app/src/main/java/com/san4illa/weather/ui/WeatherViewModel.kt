@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.san4illa.weather.domain.WeatherForecast
-import com.san4illa.weather.network.State
+import com.san4illa.weather.domain.State
 import com.san4illa.weather.repository.CityNameRepository
 import com.san4illa.weather.repository.LocationRepository
 import com.san4illa.weather.repository.Repository
