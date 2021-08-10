@@ -36,7 +36,11 @@ class WeatherViewModel @Inject constructor(
     val closeActivity: LiveData<Boolean>
         get() = _closeActivity
 
-    fun onPermissionsGranted() {
+    fun onPermissionsResult(areGranted: Boolean) {
+        if (areGranted) onPermissionsGranted() else onPermissionsDenied()
+    }
+
+    private fun onPermissionsGranted() {
         viewModelScope.launch {
             val location = locationRepository.getLocation()
             location?.let {
@@ -63,7 +67,7 @@ class WeatherViewModel @Inject constructor(
         _city.value = cityNameRepository.getCityName(location)
     }
 
-    fun onPermissionsDenied() {
+    private fun onPermissionsDenied() {
         _closeActivity.value = true
     }
 }

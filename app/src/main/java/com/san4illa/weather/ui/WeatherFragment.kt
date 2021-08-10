@@ -20,12 +20,7 @@ class WeatherFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             val arePermissionsGranted = it[Manifest.permission.ACCESS_FINE_LOCATION] != false
                     && it[Manifest.permission.ACCESS_COARSE_LOCATION] != false
-
-            if (arePermissionsGranted) {
-                viewModel.onPermissionsGranted()
-            } else {
-                viewModel.onPermissionsDenied()
-            }
+            viewModel.onPermissionsResult(arePermissionsGranted)
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
