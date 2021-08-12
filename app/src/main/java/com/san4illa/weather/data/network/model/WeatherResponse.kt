@@ -1,8 +1,8 @@
-package com.san4illa.weather.network.model
+package com.san4illa.weather.data.network.model
 
-import com.san4illa.weather.domain.DailyWeather
-import com.san4illa.weather.domain.Weather
-import com.san4illa.weather.domain.WeatherForecast
+import com.san4illa.weather.domain.model.DailyWeather
+import com.san4illa.weather.domain.model.Weather
+import com.san4illa.weather.domain.model.WeatherForecast
 import kotlin.math.round
 
 data class WeatherResponse(

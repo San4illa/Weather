@@ -7,7 +7,7 @@
 
         <variable
             name="weather"
-            type="com.san4illa.weather.domain.Weather" />
+            type="com.san4illa.weather.domain.model.Weather" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

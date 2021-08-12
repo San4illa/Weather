@@ -1,4 +1,4 @@
-package com.san4illa.weather.ui
+package com.san4illa.weather.ui.weather
 
 import android.Manifest
 import android.os.Bundle
@@ -20,10 +20,7 @@ class WeatherFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             val arePermissionsGranted = it[Manifest.permission.ACCESS_FINE_LOCATION] != false
                     && it[Manifest.permission.ACCESS_COARSE_LOCATION] != false
-
-            if (arePermissionsGranted) {
-                requestLocation()
-            }
+            viewModel.onPermissionsResult(arePermissionsGranted)
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -51,11 +48,11 @@ class WeatherFragment : Fragment() {
         locationPermissionLauncher.launch(
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         )
+
+        viewModel.closeActivity.observe(viewLifecycleOwner, { if (it) closeActivity() })
     }
 
-    private fun requestLocation() {
-        viewModel.location.observe(viewLifecycleOwner, { location ->
-            viewModel.onLocationUpdated(location)
-        })
+    private fun closeActivity() {
+        requireActivity().finish()
     }
 }

@@ -1,4 +1,4 @@
-package com.san4illa.weather.domain
+package com.san4illa.weather.domain.model
 
 data class DailyWeather(
     val time: Long,

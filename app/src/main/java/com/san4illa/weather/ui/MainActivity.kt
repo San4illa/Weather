@@ -1,7 +1,8 @@
-package com.san4illa.weather
+package com.san4illa.weather.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.san4illa.weather.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
