@@ -1,7 +1,7 @@
 package com.san4illa.weather.di
 
 import com.san4illa.weather.BuildConfig
-import com.san4illa.weather.network.WeatherService
+import com.san4illa.weather.data.network.WeatherService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

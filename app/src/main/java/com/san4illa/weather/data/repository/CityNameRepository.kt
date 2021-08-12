@@ -1,4 +1,4 @@
-package com.san4illa.weather.repository
+package com.san4illa.weather.data.repository
 
 import android.content.Context
 import android.location.Geocoder

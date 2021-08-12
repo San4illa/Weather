@@ -1,6 +1,6 @@
-package com.san4illa.weather.network
+package com.san4illa.weather.data.network
 
-import com.san4illa.weather.network.model.WeatherResponse
+import com.san4illa.weather.data.network.model.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

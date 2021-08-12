@@ -1,4 +1,4 @@
-package com.san4illa.weather.ui
+package com.san4illa.weather.ui.weather
 
 import android.view.View
 import android.widget.ImageView
@@ -6,9 +6,9 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.san4illa.weather.domain.DailyWeather
-import com.san4illa.weather.domain.Weather
-import com.san4illa.weather.domain.State
+import com.san4illa.weather.domain.model.DailyWeather
+import com.san4illa.weather.domain.model.Weather
+import com.san4illa.weather.domain.model.State
 import java.text.SimpleDateFormat
 import java.util.*
 

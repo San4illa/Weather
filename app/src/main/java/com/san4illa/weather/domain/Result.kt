@@ -1,4 +1,4 @@
-package com.san4illa.weather.utils
+package com.san4illa.weather.domain
 
 /**
  * A generic class that holds a value with its loading status.

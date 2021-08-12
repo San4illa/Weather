@@ -1,4 +1,4 @@
-package com.san4illa.weather.network.model
+package com.san4illa.weather.data.network.model
 
 data class WeatherItem(
     val time: Long,

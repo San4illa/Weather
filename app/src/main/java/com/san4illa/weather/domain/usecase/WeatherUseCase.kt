@@ -1,9 +1,9 @@
-package com.san4illa.weather.usecase
+package com.san4illa.weather.domain.usecase
 
-import com.san4illa.weather.domain.WeatherForecast
-import com.san4illa.weather.repository.LocationRepository
-import com.san4illa.weather.repository.WeatherRepository
-import com.san4illa.weather.utils.UseCase
+import com.san4illa.weather.domain.model.WeatherForecast
+import com.san4illa.weather.data.repository.LocationRepository
+import com.san4illa.weather.data.repository.WeatherRepository
+import com.san4illa.weather.domain.UseCase
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 

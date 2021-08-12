@@ -1,4 +1,4 @@
-package com.san4illa.weather.ui
+package com.san4illa.weather.ui.weather
 
 import android.Manifest
 import android.os.Bundle

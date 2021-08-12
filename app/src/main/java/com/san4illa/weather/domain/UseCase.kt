@@ -1,4 +1,4 @@
-package com.san4illa.weather.utils
+package com.san4illa.weather.domain
 
 import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher

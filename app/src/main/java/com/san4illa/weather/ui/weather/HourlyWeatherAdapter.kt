@@ -1,4 +1,4 @@
-package com.san4illa.weather.ui
+package com.san4illa.weather.ui.weather
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.san4illa.weather.databinding.HourlyWeatherItemBinding
-import com.san4illa.weather.domain.Weather
+import com.san4illa.weather.domain.model.Weather
 
 class HourlyWeatherAdapter : ListAdapter<Weather, HourlyWeatherAdapter.HourlyWeatherViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HourlyWeatherViewHolder {

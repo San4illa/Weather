@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.san4illa.weather.ui.WeatherViewModel" />
+            type="com.san4illa.weather.ui.weather.WeatherViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

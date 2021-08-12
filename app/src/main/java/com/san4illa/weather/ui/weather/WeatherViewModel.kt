@@ -1,13 +1,13 @@
-package com.san4illa.weather.ui
+package com.san4illa.weather.ui.weather
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.san4illa.weather.domain.State
-import com.san4illa.weather.domain.WeatherForecast
-import com.san4illa.weather.usecase.CityNameUseCase
-import com.san4illa.weather.usecase.WeatherUseCase
+import com.san4illa.weather.domain.model.State
+import com.san4illa.weather.domain.model.WeatherForecast
+import com.san4illa.weather.domain.usecase.CityNameUseCase
+import com.san4illa.weather.domain.usecase.WeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
