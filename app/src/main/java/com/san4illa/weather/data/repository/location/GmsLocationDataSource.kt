@@ -1,4 +1,4 @@
-package com.san4illa.weather.data.repository
+package com.san4illa.weather.data.repository.location
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,7 +9,7 @@ import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class LocationRepository @Inject constructor(
+class GmsLocationDataSource @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     private val locationProvider = LocationServices.getFusedLocationProviderClient(context)
