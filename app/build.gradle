@@ -63,6 +63,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 
     implementation "com.google.android.gms:play-services-location:18.0.0"
+    implementation 'com.huawei.hms:location:6.0.0.302'
 
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
