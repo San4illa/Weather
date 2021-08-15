@@ -1,10 +1,11 @@
 package com.san4illa.weather.ui.weather
 
+import android.app.PendingIntent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.common.api.ResolvableApiException
+import com.san4illa.weather.domain.model.SettingsException
 import com.san4illa.weather.domain.model.SettingsResult.*
 import com.san4illa.weather.domain.model.State
 import com.san4illa.weather.domain.model.WeatherForecast
@@ -33,8 +34,8 @@ class WeatherViewModel @Inject constructor(
     val state: LiveData<State>
         get() = _state
 
-    private val _requestLocationSettings = MutableLiveData<ResolvableApiException>()
-    val requestLocationSettings: LiveData<ResolvableApiException>
+    private val _requestLocationSettings = MutableLiveData<SettingsException>()
+    val requestLocationSettings: LiveData<SettingsException>
         get() = _requestLocationSettings
 
     private val _closeActivity = MutableLiveData(false)
@@ -72,8 +73,8 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    private fun requestGps(error: Throwable) {
-        _requestLocationSettings.value = error as ResolvableApiException
+    private fun requestGps(error: SettingsException) {
+        _requestLocationSettings.value = error
     }
 
     private fun showError() {

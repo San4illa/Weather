@@ -7,6 +7,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.SettingsClient
+import com.san4illa.weather.domain.model.SettingsException
 import com.san4illa.weather.domain.model.SettingsResult
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -37,7 +38,8 @@ class GmsLocationDataSource @Inject constructor(
                 }
                 .addOnFailureListener { exception ->
                     if (exception is ResolvableApiException) {
-                        continuation.resume(SettingsResult.Disabled(exception))
+                        val settingsException = SettingsException(exception.resolution)
+                        continuation.resume(SettingsResult.Disabled(settingsException))
                     } else {
                         continuation.resume(SettingsResult.Unknown(exception))
                     }

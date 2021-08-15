@@ -20,6 +20,10 @@ class LocationRepository @Inject constructor(
     }
 
     suspend fun checkLocationSettings(): SettingsResult {
-        return gmsLocationDataSource.checkLocationSettings()
+        return when (mobileServicesRepository.getMobileServicesType()) {
+            GOOGLE -> gmsLocationDataSource.checkLocationSettings()
+            HUAWEI -> hmsLocationDataSource.checkLocationSettings()
+            NONE -> SettingsResult.Unknown(Throwable("Unknown service type"))
+        }
     }
 }
