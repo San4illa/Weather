@@ -1,6 +1,5 @@
 package com.san4illa.weather.ui.weather
 
-import android.app.PendingIntent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
