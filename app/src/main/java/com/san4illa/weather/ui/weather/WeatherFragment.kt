@@ -1,10 +1,12 @@
 package com.san4illa.weather.ui.weather
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +23,11 @@ class WeatherFragment : Fragment() {
             val arePermissionsGranted = it[Manifest.permission.ACCESS_FINE_LOCATION] != false
                     && it[Manifest.permission.ACCESS_COARSE_LOCATION] != false
             viewModel.onPermissionsResult(arePermissionsGranted)
+        }
+
+    private val locationSettingsLauncher =
+        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+            viewModel.onSettingsResult(it.resultCode == RESULT_OK)
         }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -49,7 +56,11 @@ class WeatherFragment : Fragment() {
             arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         )
 
-        viewModel.closeActivity.observe(viewLifecycleOwner, { if (it) closeActivity() })
+        viewModel.requestLocationSettings.observe(viewLifecycleOwner) { error ->
+            val settingsRequest = IntentSenderRequest.Builder(error.resolution).build()
+            locationSettingsLauncher.launch(settingsRequest)
+        }
+        viewModel.closeActivity.observe(viewLifecycleOwner) { if (it) closeActivity() }
     }
 
     private fun closeActivity() {
