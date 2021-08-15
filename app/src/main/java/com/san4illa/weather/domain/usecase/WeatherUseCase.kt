@@ -1,7 +1,7 @@
 package com.san4illa.weather.domain.usecase
 
 import com.san4illa.weather.domain.model.WeatherForecast
-import com.san4illa.weather.data.repository.LocationRepository
+import com.san4illa.weather.data.repository.location.LocationRepository
 import com.san4illa.weather.data.repository.WeatherRepository
 import com.san4illa.weather.domain.UseCase
 import kotlinx.coroutines.Dispatchers
