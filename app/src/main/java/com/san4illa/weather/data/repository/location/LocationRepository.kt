@@ -3,6 +3,7 @@ package com.san4illa.weather.data.repository.location
 import android.location.Location
 import com.san4illa.weather.data.repository.MobileServicesRepository
 import com.san4illa.weather.domain.model.MobileServicesType.*
+import com.san4illa.weather.domain.model.SettingsResult
 import javax.inject.Inject
 
 class LocationRepository @Inject constructor(
@@ -16,5 +17,9 @@ class LocationRepository @Inject constructor(
             HUAWEI -> hmsLocationDataSource.getLocation()
             NONE -> null
         }
+    }
+
+    suspend fun checkLocationSettings(): SettingsResult {
+        return gmsLocationDataSource.checkLocationSettings()
     }
 }

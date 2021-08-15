@@ -42,6 +42,14 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideGmsSettingsClient(
+        @ApplicationContext context: Context
+    ): com.google.android.gms.location.SettingsClient {
+        return com.google.android.gms.location.LocationServices.getSettingsClient(context)
+    }
+
+    @Singleton
+    @Provides
     fun provideHmsLocationProvider(
         @ApplicationContext context: Context
     ): com.huawei.hms.location.FusedLocationProviderClient {
