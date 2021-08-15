@@ -2,11 +2,9 @@ package com.san4illa.weather.data.repository.location
 
 import android.annotation.SuppressLint
 import android.location.Location
+import android.os.Looper
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.SettingsClient
+import com.google.android.gms.location.*
 import com.san4illa.weather.domain.model.SettingsException
 import com.san4illa.weather.domain.model.SettingsResult
 import javax.inject.Inject
@@ -20,10 +18,12 @@ class GmsLocationDataSource @Inject constructor(
     @SuppressLint("MissingPermission")
     suspend fun getLocation(): Location? {
         return suspendCoroutine { continuation ->
-            locationProvider.lastLocation
-                .addOnSuccessListener { location ->
-                    continuation.resume(location)
+            locationProvider.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult?) {
+                    continuation.resume(locationResult?.lastLocation)
+                    locationProvider.removeLocationUpdates(this)
                 }
+            }, Looper.getMainLooper())
         }
     }
 

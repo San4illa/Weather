@@ -1,11 +1,9 @@
 package com.san4illa.weather.data.repository.location
 
 import android.location.Location
+import android.os.Looper
 import com.huawei.hms.common.ResolvableApiException
-import com.huawei.hms.location.FusedLocationProviderClient
-import com.huawei.hms.location.LocationRequest
-import com.huawei.hms.location.LocationSettingsRequest
-import com.huawei.hms.location.SettingsClient
+import com.huawei.hms.location.*
 import com.san4illa.weather.domain.model.SettingsException
 import com.san4illa.weather.domain.model.SettingsResult
 import javax.inject.Inject
@@ -18,10 +16,12 @@ class HmsLocationDataSource @Inject constructor(
 ) {
     suspend fun getLocation(): Location? {
         return suspendCoroutine { continuation ->
-            locationProvider.lastLocation
-                .addOnSuccessListener { location ->
-                    continuation.resume(location)
+            locationProvider.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult?) {
+                    continuation.resume(locationResult?.lastLocation)
+                    locationProvider.removeLocationUpdates(this)
                 }
+            }, Looper.getMainLooper())
         }
     }
 
