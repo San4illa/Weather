@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.san4illa.weather.domain.model.SettingsException
+import com.san4illa.weather.domain.model.GpsSettingsException
 import com.san4illa.weather.domain.model.SettingsResult.*
 import com.san4illa.weather.domain.model.State
 import com.san4illa.weather.domain.model.WeatherForecast
-import com.san4illa.weather.domain.usecase.CheckSettingsUseCase
+import com.san4illa.weather.domain.usecase.CheckGpsSettingsUseCase
 import com.san4illa.weather.domain.usecase.CityNameUseCase
 import com.san4illa.weather.domain.usecase.WeatherUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
-    private val checkSettingsUseCase: CheckSettingsUseCase,
+    private val checkGpsSettingsUseCase: CheckGpsSettingsUseCase,
     private val weatherUseCase: WeatherUseCase,
     private val cityNameUseCase: CityNameUseCase
 ) : ViewModel() {
@@ -33,8 +33,8 @@ class WeatherViewModel @Inject constructor(
     val state: LiveData<State>
         get() = _state
 
-    private val _requestLocationSettings = MutableLiveData<SettingsException>()
-    val requestLocationSettings: LiveData<SettingsException>
+    private val _requestLocationSettings = MutableLiveData<GpsSettingsException>()
+    val requestLocationSettings: LiveData<GpsSettingsException>
         get() = _requestLocationSettings
 
     private val _closeActivity = MutableLiveData(false)
@@ -47,17 +47,17 @@ class WeatherViewModel @Inject constructor(
 
     private fun onPermissionsGranted() {
         viewModelScope.launch {
-            checkSettingsUseCase.invoke(Unit).handle({ settings ->
+            checkGpsSettingsUseCase.invoke(Unit).handle({ settings ->
                 when (settings) {
-                    is Enabled -> getData()
-                    is Disabled -> requestGps(settings.error)
+                    is Enabled -> getForecast()
+                    is Disabled -> showLocationDialog(settings.error)
                     is Unknown -> showError()
                 }
             })
         }
     }
 
-    private fun getData() {
+    private fun getForecast() {
         viewModelScope.launch {
             weatherUseCase.invoke(Unit).handle({ weatherForecast ->
                 _weatherForecast.value = weatherForecast
@@ -72,7 +72,7 @@ class WeatherViewModel @Inject constructor(
         }
     }
 
-    private fun requestGps(error: SettingsException) {
+    private fun showLocationDialog(error: GpsSettingsException) {
         _requestLocationSettings.value = error
     }
 
@@ -89,6 +89,6 @@ class WeatherViewModel @Inject constructor(
     }
 
     fun onSettingsResult(isGpsEnabled: Boolean) {
-        if (isGpsEnabled) getData() else closeActivity()
+        if (isGpsEnabled) getForecast() else closeActivity()
     }
 }

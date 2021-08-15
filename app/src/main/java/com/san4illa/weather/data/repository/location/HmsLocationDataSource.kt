@@ -4,7 +4,7 @@ import android.location.Location
 import android.os.Looper
 import com.huawei.hms.common.ResolvableApiException
 import com.huawei.hms.location.*
-import com.san4illa.weather.domain.model.SettingsException
+import com.san4illa.weather.domain.model.GpsSettingsException
 import com.san4illa.weather.domain.model.SettingsResult
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -36,7 +36,7 @@ class HmsLocationDataSource @Inject constructor(
                 }
                 .addOnFailureListener { exception ->
                     if (exception is ResolvableApiException) {
-                        val settingsException = SettingsException(exception.resolution)
+                        val settingsException = GpsSettingsException(exception.resolution)
                         continuation.resume(SettingsResult.Disabled(settingsException))
                     } else {
                         continuation.resume(SettingsResult.Unknown(exception))
