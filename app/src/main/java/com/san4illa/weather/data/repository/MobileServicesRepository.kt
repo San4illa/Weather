@@ -4,7 +4,8 @@ import android.content.Context
 import com.google.android.gms.common.GoogleApiAvailability
 import com.huawei.hms.api.HuaweiApiAvailability
 import com.san4illa.weather.domain.model.MobileServicesType
-import com.san4illa.weather.domain.model.MobileServicesType.*
+import com.san4illa.weather.domain.model.MobileServicesType.GOOGLE
+import com.san4illa.weather.domain.model.MobileServicesType.HUAWEI
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class MobileServicesRepository @Inject constructor(
         return when {
             isGoogleServicesAvailable() -> GOOGLE
             isHuaweiServicesAvailable() -> HUAWEI
-            else -> NONE
+            else -> GOOGLE
         }
     }
 

@@ -1,20 +1,21 @@
 package com.san4illa.weather.data.repository.location
 
+import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Looper
-import com.huawei.hms.common.ResolvableApiException
-import com.huawei.hms.location.*
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.san4illa.weather.domain.model.GpsSettingsException
 import com.san4illa.weather.domain.model.SettingsResult
-import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class HmsLocationDataSource @Inject constructor(
+class GmsLocationRepository(
     private val locationProvider: FusedLocationProviderClient,
     private val locationSettings: SettingsClient
-) {
-    suspend fun getLocation(): Location? {
+) : LocationRepository {
+    @SuppressLint("MissingPermission")
+    override suspend fun getLocation(): Location? {
         return suspendCoroutine { continuation ->
             locationProvider.requestLocationUpdates(getLocationRequest(), object : LocationCallback() {
                 override fun onLocationResult(locationResult: LocationResult?) {
@@ -25,7 +26,7 @@ class HmsLocationDataSource @Inject constructor(
         }
     }
 
-    suspend fun checkLocationSettings(): SettingsResult {
+    override suspend fun checkLocationSettings(): SettingsResult {
         return suspendCoroutine { continuation ->
             val builder = LocationSettingsRequest.Builder()
                 .addLocationRequest(getLocationRequest())
