@@ -1,37 +1,21 @@
 package com.san4illa.weather.di
 
 import android.content.Context
-import com.san4illa.weather.BuildConfig
-import com.san4illa.weather.data.network.WeatherService
+import com.san4illa.weather.data.repository.MobileServicesRepository
+import com.san4illa.weather.data.repository.location.GmsLocationRepository
+import com.san4illa.weather.data.repository.location.HmsLocationRepository
+import com.san4illa.weather.data.repository.location.LocationRepository
+import com.san4illa.weather.domain.model.MobileServicesType
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-    private const val BASE_URL = "https://api.darksky.net/forecast/${BuildConfig.API_KEY}/"
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideApiService(retrofit: Retrofit): WeatherService {
-        return retrofit.create(WeatherService::class.java)
-    }
-
+object LocationModule {
     @Singleton
     @Provides
     fun provideGmsLocationProvider(
@@ -62,5 +46,20 @@ object AppModule {
         @ApplicationContext context: Context
     ): com.huawei.hms.location.SettingsClient {
         return com.huawei.hms.location.LocationServices.getSettingsClient(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocationRepository(
+        mobileServicesRepository: MobileServicesRepository,
+        gmsLocationProvider: com.google.android.gms.location.FusedLocationProviderClient,
+        gmsLocationSettingsClient: com.google.android.gms.location.SettingsClient,
+        hmsLocationProvider: com.huawei.hms.location.FusedLocationProviderClient,
+        hmsLocationSettingsClient: com.huawei.hms.location.SettingsClient
+    ): LocationRepository {
+        return when (mobileServicesRepository.getMobileServicesType()) {
+            MobileServicesType.GOOGLE -> GmsLocationRepository(gmsLocationProvider, gmsLocationSettingsClient)
+            MobileServicesType.HUAWEI -> HmsLocationRepository(hmsLocationProvider, hmsLocationSettingsClient)
+        }
     }
 }
