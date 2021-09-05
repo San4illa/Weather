@@ -7,9 +7,9 @@ import kotlin.math.roundToInt
 
 data class WeatherItemDto(
     @SerializedName("time") val time: Long,
-    @SerializedName("temperature") val temperature: Double?,
-    @SerializedName("temperatureHigh") val temperatureHigh: Double?,
-    @SerializedName("temperatureLow") val temperatureLow: Double?,
+    @SerializedName("temperature") val temperature: Double = 0.0,
+    @SerializedName("temperatureHigh") val temperatureHigh: Double = 0.0,
+    @SerializedName("temperatureLow") val temperatureLow: Double = 0.0,
     @SerializedName("windSpeed") val windSpeed: Double,
     @SerializedName("humidity") val humidity: Double,
     @SerializedName("pressure") val pressure: Double,
@@ -18,7 +18,7 @@ data class WeatherItemDto(
 ) {
     fun toWeather() = Weather(
         time = time,
-        temperature = format(temperature!!),
+        temperature = format(temperature),
         summary = summary,
         iconUrl = createIconUrl(icon)
     )
@@ -33,8 +33,8 @@ data class WeatherItemDto(
 
     fun toDailyWeather() = DailyWeather(
         time = time,
-        minTemperature = format(temperatureLow!!),
-        maxTemperature = format(temperatureHigh!!),
+        minTemperature = format(temperatureLow),
+        maxTemperature = format(temperatureHigh),
         summary = summary,
         iconUrl = createIconUrl(icon)
     )
